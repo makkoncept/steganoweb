@@ -3,7 +3,7 @@ import uuid
 
 from app import app
 from app.forms import SecretMessageEncodeForm, SecretMessageDecodeForm
-from app.helper import encode
+from app.helper import encode, decode_message
 from flask import render_template, redirect, url_for, request, session
 from werkzeug.utils import secure_filename
 from PIL import Image
@@ -73,12 +73,23 @@ def img_tag_size(height, width):
         return height, width
 
 
-@app.route("/decode")
+@app.route("/decode", methods=["GET", "POST"])
 def decode():
     form = SecretMessageDecodeForm()
-    if form.validate_on_submit:
-        print("yes")
-    return render_template("decode.html", form=form)
+    if form.validate_on_submit():
+        f = form.photo.data
+        filename = secure_filename(f.filename)
+        _, ext = os.path.splitext(filename)
+        filename = uuid.uuid4().hex + ext
+        print(filename)
+        # f, pal2, hex_codes = get_colors(f, palette_length_div=form.palette_height.data, outline_width=form.palette_outline_width.data,
+        #                outline_color=hex_to_rgb(request.form.get('palette_outline_color')))
+        path = os.path.join(app.root_path, "static/images", filename)
+        f.save(path)
+        message = decode_message(path)
+        print(message)
+        return render_template("decode.html", form=form, hidden_message=message)
+    return render_template("decode.html", form=form, hidden_message=None)
 
 
 # @app.errorhandler(413)

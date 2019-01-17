@@ -31,13 +31,10 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div class="container">
         <div style="margin-top: 5%">
-            <h2 style="text-align: center;">Steganography </h2>
-            <p style="text-align: center;">basic web wrapper of the amazing <a href="https://github.com/cedricbonhomme/Stegano">stegano</a>
-                library</p>
-        </div>
-        <div style="text-align: center;">
-            <h4 style="display: inline; margin-right: 5%"><a>Encoding</a></h4>
-            <h4 style="display: inline"><a>Decoding</a></h4>
+            <h2 style="text-align: center;">Decoding</h2>
+            <p style="text-align: center;">Decode the hidden message in the image encoded.
+                <br> Don't have image with hidden message? <strong><a href="{{url_for('index')}}">Create
+                        one</a></strong> </p>
         </div>
         <!-- <div class="row">
             <div class="six columns" style="padding-right: 10px">
@@ -49,22 +46,20 @@
             </div>
         </div> -->
         <div style="padding-top: 40px">
-            <!-- <h3>Try It Now</h3> -->
-            <p>Hide secret message in an image. Upload a PNG image file and write a message. Using the stegano library,
-                the message will be encoded into the image. </p>
-            <p>You can then save the image and send it to a friend, who
-                can <strong><a href="{{url_for('decode')}}">DECODE</a></strong> the message in it.</p>
+            {% if hidden_message%}
+            <h3 style="text-align: center;"><u>Hidden Message</u></h3>
+            <hr>
+            <h4>{{hidden_message}}</h4>
+            <hr>
+            {% endif %}
+            <!-- <p>You can then save the image and send it to a friend, who
+                can <strong><a href="{{url_for('decode')}}">DECODE</a></strong> the message in it.</p> -->
             <form method="POST" enctype="multipart/form-data">
                 {{form.hidden_tag()}}
                 <!-- <div class="row"> -->
                 <!-- <div class="six columns"> -->
-                <label>Secret message (less than 100 charachters)</label>
-                {{form.message(class="u-full-width")}}
-                {% for error in form.message.errors %}
-                <span style="color:red;">{{ error}}</span>
-                {% endfor %}
-                <h5><u>Optional</u></h5>
-                <p>Choose a PNG image or don't upload any to use a default image.</p>
+                <h5><u>Upload Image</u></h5>
+                <!-- <p>Upload image</p> -->
                 <div>
                     {{form.photo()}}
                     {% for error in form.photo.errors %}
