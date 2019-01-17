@@ -53,13 +53,7 @@
             <p>You can then save the image and send it to a friend, who
                 can <strong><a href="{{url_for('decode')}}">DECODE</a></strong> the message in it.</p>
             <form method="POST" enctype="multipart/form-data">
-                <div>
-                    {{form.hidden_tag()}}
-                    {{form.photo(class="u-full-width")}}
-                    {% for error in form.photo.errors %}
-                    <span style="color:red;">{{ error}}</span>
-                    {% endfor %}
-                </div>
+                {{form.hidden_tag()}}
                 <!-- <div class="row"> -->
                 <!-- <div class="six columns"> -->
                 <label>Secret message (less than 100 charachters)</label>
@@ -67,6 +61,14 @@
                 {% for error in form.message.errors %}
                 <span style="color:red;">{{ error}}</span>
                 {% endfor %}
+                <h5><u>Optional</u></h5>
+                <p>Choose a PNG image or don't upload any to use a default image.</p>
+                <div>
+                    {{form.photo()}}
+                    {% for error in form.photo.errors %}
+                    <span style="color:red;">{{ error}}</span>
+                    {% endfor %}
+                </div>
         </div>
         <input class="button-primary" type="submit" value="submit">
         </form>

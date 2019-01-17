@@ -2,7 +2,7 @@ import os
 import uuid
 
 from app import app
-from app.forms import SecretMessageForm
+from app.forms import SecretMessageEncodeForm, SecretMessageDecodeForm
 from app.helper import encode
 from flask import render_template, redirect, url_for, request, session
 from werkzeug.utils import secure_filename
@@ -11,29 +11,35 @@ from PIL import Image
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    form = SecretMessageForm()
+    form = SecretMessageEncodeForm()
     if form.validate_on_submit():
         print("hahah")
         # print(hex_to_rgb(request.form.get('palette_outline_color')))
-        f = form.photo.data
-        filename = secure_filename(f.filename)
-        _, ext = os.path.splitext(filename)
-        filename = uuid.uuid4().hex + ext
-        print(filename)
-        # f, pal2, hex_codes = get_colors(f, palette_length_div=form.palette_height.data, outline_width=form.palette_outline_width.data,
-        #                outline_color=hex_to_rgb(request.form.get('palette_outline_color')))
-        path = os.path.join(app.root_path, "static/images", filename)
-        save_path = os.path.join(app.root_path, "static/images", "hid" + filename)
+        if form.photo.data:
+            f = form.photo.data
+            filename = secure_filename(f.filename)
+            _, ext = os.path.splitext(filename)
+            filename = uuid.uuid4().hex + ext
+            print(filename)
+            # f, pal2, hex_codes = get_colors(f, palette_length_div=form.palette_height.data, outline_width=form.palette_outline_width.data,
+            #                outline_color=hex_to_rgb(request.form.get('palette_outline_color')))
+            path = os.path.join(app.root_path, "static/images", filename)
+            f.save(path)
+            save_file_name = "hid" + filename
+            save_path = os.path.join(app.root_path, "static/images", save_file_name)
+        else:
+            path = os.path.join(app.root_path, "static/images", "default.png")
+            save_file_name = uuid.uuid4().hex + ".png"
+            save_path = os.path.join(app.root_path, "static/images", save_file_name)
         # path2 = os.path.join(app.root_path, 'static/images', "pal"+filename)
         message = form.message.data
-        f.save(path)
         f = Image.open(path)
         encode(path, message, save_path)
         # pal2.save(path2)
         print(f.height)
 
         return redirect(
-            url_for("picture", name="hid" + filename, height=f.height, width=f.width)
+            url_for("picture", name=save_file_name, height=f.height, width=f.width)
         )
 
     # return render_template('index.html', form=form, src='default')
@@ -69,8 +75,10 @@ def img_tag_size(height, width):
 
 @app.route("/decode")
 def decode():
-    form = SecretMessageForm()
-    return render_template("index.html", form=form)
+    form = SecretMessageDecodeForm()
+    if form.validate_on_submit:
+        print("yes")
+    return render_template("decode.html", form=form)
 
 
 # @app.errorhandler(413)
