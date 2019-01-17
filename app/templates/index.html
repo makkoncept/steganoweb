@@ -36,8 +36,8 @@
                 library</p>
         </div>
         <div style="text-align: center;">
-            <h4 style="display: inline; margin-right: 5%"><a>Encoding</a></h4>
-            <h4 style="display: inline"><a>Decoding</a></h4>
+            <h4 style="display: inline; margin-right: 5%"><strong><a href="{{url_for('index')}}">Encoding</a></strong></h4>
+            <h4 style="display: inline"><strong><a href="{{url_for('decode')}}">Decoding</a></strong></h4>
         </div>
         <!-- <div class="row">
             <div class="six columns" style="padding-right: 10px">
@@ -52,8 +52,8 @@
             <!-- <h3>Try It Now</h3> -->
             <p>Hide secret message in an image. Upload a PNG image file and write a message. Using the stegano library,
                 the message will be encoded into the image. </p>
-            <p>You can then save the image and send it to a friend, who
-                can <strong><a href="{{url_for('decode')}}">DECODE</a></strong> the message in it.</p>
+            <p><strong><u>You can then save the image and send it to a friend</u></strong>, who
+                can then <strong><a href="{{url_for('decode')}}">DECODE</a></strong> the message in it.</p>
             <form method="POST" enctype="multipart/form-data">
                 {{form.hidden_tag()}}
                 <!-- <div class="row"> -->
@@ -64,7 +64,7 @@
                 <span style="color:red;">{{ error}}</span>
                 {% endfor %}
                 <h5><u>Optional</u></h5>
-                <p>Choose a PNG image or don't upload any to use a default image.</p>
+                <p>Upload a PNG image( <u>or don't to use a default</u>)</p>
                 <div>
                     {{form.photo()}}
                     {% for error in form.photo.errors %}

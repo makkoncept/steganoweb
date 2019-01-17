@@ -88,6 +88,8 @@ def decode():
         f.save(path)
         message = decode_message(path)
         print(message)
+        if message is None:
+            message = "no_hidden_message"
         return render_template("decode.html", form=form, hidden_message=message)
     return render_template("decode.html", form=form, hidden_message=None)
 

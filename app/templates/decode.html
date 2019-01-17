@@ -32,7 +32,7 @@
     <div class="container">
         <div style="margin-top: 5%">
             <h2 style="text-align: center;">Decoding</h2>
-            <p style="text-align: center;">Decode the hidden message in the image encoded.
+            <p style="text-align: center;">Decode the hidden message in the image.
                 <br> Don't have image with hidden message? <strong><a href="{{url_for('index')}}">Create
                         one</a></strong> </p>
         </div>
@@ -47,10 +47,14 @@
         </div> -->
         <div style="padding-top: 40px">
             {% if hidden_message%}
+            {% if hidden_message == "no_hidden_message" %}
+            <h5 style="color: red;">Not any hidden message in image. <strong><a href="{{url_for('index')}}">Create One?</a></strong></h5>
+            {% else %}
             <h3 style="text-align: center;"><u>Hidden Message</u></h3>
             <hr>
             <h4>{{hidden_message}}</h4>
             <hr>
+            {% endif %}
             {% endif %}
             <!-- <p>You can then save the image and send it to a friend, who
                 can <strong><a href="{{url_for('decode')}}">DECODE</a></strong> the message in it.</p> -->
