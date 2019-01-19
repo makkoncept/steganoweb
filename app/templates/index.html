@@ -48,7 +48,7 @@
                 {{form.hidden_tag()}}
                 <label>Secret message (less than 100 charachters)</label>
                 {{form.message(class="u-full-width")}}
-                {% for error in form.message.ors %}
+                {% for error in form.message.errors %}
                 <span style="color:red;">{{ error}}</span>
                 {% endfor %}
                 <h5><u>Optional</u></h5>
