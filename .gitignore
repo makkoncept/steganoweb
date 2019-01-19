@@ -8,6 +8,7 @@ __pycache__/
 *.png
 
 todo.txt
+!default.png
 
 # Distribution / packaging
 .Python
