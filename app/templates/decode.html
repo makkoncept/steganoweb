@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Color-Palette</title>
+    <title>Steganography</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -36,15 +36,6 @@
                 <br> Don't have image with hidden message? <strong><a href="{{url_for('index')}}">Create
                         one</a></strong> </p>
         </div>
-        <!-- <div class="row">
-            <div class="six columns" style="padding-right: 10px">
-                <img src="{{url_for('static', filename='images/3.jpg')}}" width="450" height="310">
-
-            </div>
-            <div class="six columns" style="padding-left: 10px">
-                <img src="{{url_for('static', filename='images/4.jpg')}}" width="450" height="310">
-            </div>
-        </div> -->
         <div style="padding-top: 40px">
             {% if hidden_message%}
             {% if hidden_message == "no_hidden_message" %}
@@ -56,14 +47,9 @@
             <hr>
             {% endif %}
             {% endif %}
-            <!-- <p>You can then save the image and send it to a friend, who
-                can <strong><a href="{{url_for('decode')}}">DECODE</a></strong> the message in it.</p> -->
             <form method="POST" enctype="multipart/form-data">
                 {{form.hidden_tag()}}
-                <!-- <div class="row"> -->
-                <!-- <div class="six columns"> -->
                 <h5><u>Upload Image</u></h5>
-                <!-- <p>Upload image</p> -->
                 <div>
                     {{form.photo()}}
                     {% for error in form.photo.errors %}
