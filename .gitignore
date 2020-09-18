@@ -9,6 +9,7 @@ __pycache__/
 
 todo.txt
 !default.png
+.vscode/
 
 # Distribution / packaging
 .Python
