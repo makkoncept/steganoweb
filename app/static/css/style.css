@@ -1,0 +1,38 @@
+.nav-links {
+  display: flex;
+
+  justify-content: center;
+}
+
+/* For github corner. credit: https://github.com/tholman/github-corners */
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+
+/* utils */
+.margin-top-big {
+  margin-top: 3rem;
+}
+
+.margin-right-xl {
+  margin-right: 8rem;
+}
+
+.text-align-center {
+  text-align: center;
+}
