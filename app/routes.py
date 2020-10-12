@@ -1,37 +1,28 @@
 import os
 import uuid
 
-from app import app
-from app.forms import SecretMessageEncodeForm, SecretMessageDecodeForm
-from app.helper import encode, decode_message
-from flask import render_template, redirect, url_for, request, session
-from werkzeug.utils import secure_filename
 from PIL import Image
+from werkzeug.utils import secure_filename
+from flask import render_template, redirect, url_for, request, session
+
+from app import app, DEFAULT_FILE_PATH
+from app.forms import SecretMessageEncodeForm, SecretMessageDecodeForm
+from app.helper import encode_message, decode_message
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     form = SecretMessageEncodeForm()
-    if form.validate_on_submit():
-        if form.photo.data:
-            f = form.photo.data
-            filename = secure_filename(f.filename)
-            _, ext = os.path.splitext(filename)
-            filename = uuid.uuid4().hex + ext
-            path = os.path.join(app.root_path, "static/images", filename)
-            f.save(path)
-            save_file_name = "hid" + filename
-            save_path = os.path.join(app.root_path, "static/images", save_file_name)
-        else:
-            path = os.path.join(app.root_path, "static/images", "default.png")
-            save_file_name = uuid.uuid4().hex + ".png"
-            save_path = os.path.join(app.root_path, "static/images", save_file_name)
+    if form.validate_on_submit():  # if server side validation passes
         message = form.message.data
-        f = Image.open(path)
-        encode(path, message, save_path)
+        if form.photo.data:  # if the user has provided their own image
+            processed_filename = encode_message(form.photo.data, message)
+        else:
+            default_image = Image.open(DEFAULT_FILE_PATH)
+            processed_filename = encode_message(default_image, message)
 
         return redirect(
-            url_for("picture", name=save_file_name, height=f.height, width=f.width)
+            url_for("picture", name=processed_filename, height=500, width=500)
         )
 
     return render_template("index.html", form=form)
