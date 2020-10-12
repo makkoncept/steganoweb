@@ -1,19 +1,15 @@
 {% extends "layout.html" %} {% block content %}
 <div class="margin-top-big">
   <h3 class="text-align-center">Your Image</h3>
-  <p class="text-align-center">
-    Right click on it, and select "save image as" to download it. The downloaded image will be of Original Size.
-    <strong>Send it to your friend or decode the message yourself</strong>.
-  </p>
+  <p class="text-align-center"><strong>Download and send it to your friend or decode the message yourself</strong>.</p>
   <h4 class="text-align-center"><a href="{{url_for('decode')}}">Decode the message ?</a></h4>
 </div>
 <div>
-  <img
-    src="{{src}}"
-    height="{{height}}"
-    width="{{width}}"
-    style="margin-left: auto; margin-right: auto; display: block"
-  />
+  <div class="image-wrapper">
+    <img src="{{src}}" />
+    <div class="overlay"></div>
+    <a href="{{src}}" class="button button-primary" download="secret_image">Download Image</a>
+  </div>
 </div>
 
 {% endblock content %}
