@@ -17,6 +17,6 @@ def encode_message(image, message):
     return filename
 
 
-def decode_message(img_path):
-    message = lsb.reveal(img_path)
+def decode_message(image):
+    message = lsb.reveal(image)
     return message

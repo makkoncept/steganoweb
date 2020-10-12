@@ -2,8 +2,7 @@ import os
 import uuid
 
 from PIL import Image
-from werkzeug.utils import secure_filename
-from flask import render_template, redirect, url_for, request, session
+from flask import render_template, redirect, url_for
 
 from app import app, DEFAULT_FILE_PATH
 from app.forms import SecretMessageEncodeForm, SecretMessageDecodeForm
@@ -36,13 +35,7 @@ def picture(image_name):
 def decode():
     form = SecretMessageDecodeForm()
     if form.validate_on_submit():
-        f = form.photo.data
-        filename = secure_filename(f.filename)
-        _, ext = os.path.splitext(filename)
-        filename = uuid.uuid4().hex + ext
-        path = os.path.join(app.root_path, "static/images", filename)
-        f.save(path)
-        message = decode_message(path)
+        message = decode_message(form.photo.data)
         if message is None:
             message = "no_hidden_message"
         return render_template("decode.html", form=form, hidden_message=message)
