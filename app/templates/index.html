@@ -12,12 +12,9 @@
 </div>
 <div class="margin-top-big">
   <p>
-    Hide secret message in an image. Upload a PNG image file and write a message. Using the stegano library, the message
-    will be encoded into the image.
-  </p>
-  <p>
-    <strong><u>You can then save the image and send it to a friend</u></strong
-    >, who can then <strong><a href="{{url_for('decode')}}">DECODE</a></strong> the message in it.
+    Upload a PNG image file and write a message. Using the stegano library, the message will 
+    be encoded into the image. You can then save the image and send it to a friend who can 
+    then <strong><a href="{{url_for('decode')}}">DECODE</a></strong> the message in it.
   </p>
   <form method="POST" enctype="multipart/form-data">
     {{form.hidden_tag()}}
@@ -25,8 +22,7 @@
     {{form.message(class="u-full-width")}} {% for error in form.message.errors %}
     <span style="color: red">{{ error}}</span>
     {% endfor %}
-    <h5><u>Optional</u></h5>
-    <p>Upload a PNG image( <u>or don't to use a default image</u>)</p>
+    <label>Upload a PNG image</label>
     <div>
       {{form.photo()}} {% for error in form.photo.errors %}
       <span style="color: red">{{ error}}</span>

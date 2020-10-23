@@ -4,7 +4,7 @@ import uuid
 from PIL import Image
 from flask import render_template, redirect, url_for
 
-from app import app, DEFAULT_FILE_PATH
+from app import app
 from app.forms import SecretMessageEncodeForm, SecretMessageDecodeForm
 from app.helper import encode_message, decode_message
 
@@ -14,11 +14,7 @@ def index():
     form = SecretMessageEncodeForm()
     if form.validate_on_submit():  # if server side validation passes
         message = form.message.data
-        if form.photo.data:  # if the user has provided their own image
-            processed_filename = encode_message(form.photo.data, message)
-        else:
-            default_image = Image.open(DEFAULT_FILE_PATH)
-            processed_filename = encode_message(default_image, message)
+        processed_filename = encode_message(form.photo.data, message)
 
         return redirect(url_for("picture", image_name=processed_filename))
 
@@ -40,4 +36,3 @@ def decode():
             message = "no_hidden_message"
         return render_template("decode.html", form=form, hidden_message=message)
     return render_template("decode.html", form=form, hidden_message=None)
-

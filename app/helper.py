@@ -4,7 +4,7 @@ import uuid
 from stegano import lsb
 from werkzeug.utils import secure_filename
 
-from app import app, DEFAULT_FILE_PATH
+from app import app
 
 
 def encode_message(image, message):
