@@ -21,7 +21,7 @@
     {{form.hidden_tag()}}
     <h5><u>Upload Image</u></h5>
     <div>
-      {{form.photo()}} {% for error in form.photo.errors %}
+      {{form.photo(onchange='handleImageUpload(event)')}} {% for error in form.photo.errors %}
       <span style="color: red">{{ error}}</span>
       {% endfor %}
     </div>

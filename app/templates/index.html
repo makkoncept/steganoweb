@@ -24,7 +24,7 @@
     {% endfor %}
     <label>Upload a PNG image</label>
     <div>
-      {{form.photo()}} {% for error in form.photo.errors %}
+      {{form.photo(onchange='handleImageUpload(event)')}} {% for error in form.photo.errors %}
       <span style="color: red">{{ error}}</span>
       {% endfor %}
     </div>
