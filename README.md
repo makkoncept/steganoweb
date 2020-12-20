@@ -1,6 +1,13 @@
-# [Live Demo](https://steganoweb.herokuapp.com)
-# steganoweb
-basic web wrapper of the amazing [stegano](https://github.com/cedricbonhomme/Stegano) library.
+# Steganoweb
+Basic web wrapper of the Stegano (https://github.com/cedricbonhomme/Stegano/) library.
+
+## Live
+
+View it live at : https://steganoweb.herokuapp.com/
+
+You can deploy your own instance on heroku by clicking the following button
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Run locally
 
