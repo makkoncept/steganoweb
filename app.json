@@ -1,0 +1,6 @@
+{
+  "name": "Stegano Web",
+  "description": "Basic web wrapper of the Stegano library",
+  "repository": "https://github.com/makkoncept/steganoweb",
+  "keywords": ["Flask", "Python"]
+}
